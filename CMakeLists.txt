@@ -1,4 +1,11 @@
 
+if (NOT DEFINED ARDRONE_SDK)
+	include(ardrone_build_sdk_in_source.cmake)
+	SET(ARDRONE_LIB_PATH "${ARDRONE_SDK_LIB_PATH}")
+endif()
+
+include(ardrone_sdk_check_deps.cmake)
+
 if(ARDRONE_ALL_DEPS)
 
 	set(CMAKE_CXX_FLAGS "-w -lIce -lIceUtil")
@@ -44,5 +51,7 @@ if(ARDRONE_ALL_DEPS)
 				JderobotInterfaces
 				${libxmlpp_LIBRARIES})
 
-
+ELSE()
+	message(WARNING "ardrone_server marked to build, but required dependencies were not met.
+		You should run make twice to link in-source generated ardonelib")
 ENDIF()
