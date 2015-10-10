@@ -21,6 +21,9 @@ if(ARDRONE_ALL_DEPS)
 		)
         
 
+        include_directories(include)
+
+
 	add_executable(ardrone_server src/ardrone_driver.cpp 
 					src/video.cpp 
 					src/ardrone_sdk.cpp 

@@ -20,7 +20,7 @@
 #ifndef _DRONE_CMDVELI_H_
 #define _DRONE_CMDVELI_H_
 
-#include "../teleop_twist.h"
+#include "ardrone_server/teleop_twist.h"
 #include <jderobot/cmdvel.h>
 #include <Ice/Ice.h>
 

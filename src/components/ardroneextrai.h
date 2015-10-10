@@ -20,7 +20,7 @@
 #ifndef _DRONE_EXTRAI_H_
 #define _DRONE_EXTRAI_H_
 
-#include "../teleop_twist.h"
+#include <ardrone_server/teleop_twist.h>
 #include <jderobot/ardroneextra.h>
 #include <Ice/Ice.h>
 
