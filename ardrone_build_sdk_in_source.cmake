@@ -3,41 +3,35 @@ cmake_minimum_required(VERSION 2.8)
 project(build_ardronelib)
 
 ## Build ARDrone SDK here
-set (ARDRONE_SDK_FLAVOR "autonomy")
+set (ARDRONE_SDK_FLAVOR "autonomy-gps")
+# official-patched
+# autonomy-lastest
+# autonomy-gps
+
+
+if (${ARDRONE_SDK_FLAVOR} STREQUAL "official-patched")
+    set(GIT_TAG bdacd1cbd3fbc54263d29e6e2067265e5941d10e)
+elseif (${ARDRONE_SDK_FLAVOR} STREQUAL "autonomy-lastest")
+    set(GIT_TAG master)
+elseif (${ARDRONE_SDK_FLAVOR} STREQUAL "autonomy-gps")
+    set(GIT_TAG gps)
+endif()
+
+message("ardronelib version: ${ARDRONE_SDK_FLAVOR}")
+set(ARDRONE_SDK_NAME "ardronelib" )
+set(ARDRONE_SDK ${CMAKE_BINARY_DIR}/src/${ARDRONE_SDK_NAME}/ARDroneLib)
+set(ARDRONE_SDK_LIB_PATH ${CMAKE_BINARY_DIR}/lib/ardrone)
 
 include(ExternalProject)
-
-if (${ARDRONE_SDK_FLAVOR} STREQUAL "autonomy")
-	message("ardronelib version: AutonomyLabs lastest")
-	set(ARDRONE_SDK_NAME "ardronelib" )
-	set(ARDRONE_SDK ${CMAKE_BINARY_DIR}/src/${ARDRONE_SDK_NAME}/ARDroneLib)
-	set(ARDRONE_SDK_LIB_PATH ${CMAKE_BINARY_DIR}/lib/ardrone)
-
-	ExternalProject_Add(ardronelib
-		GIT_REPOSITORY git://github.com/AutonomyLab/ardronelib.git
-		GIT_TAG master
-		PREFIX ${CMAKE_BINARY_DIR}
-		CONFIGURE_COMMAND echo "No configure"
-		BUILD_COMMAND make
-		INSTALL_COMMAND make install INSTALL_PREFIX=${ARDRONE_SDK_LIB_PATH}
-		BUILD_IN_SOURCE 1
-	)
-else()
-	message("ardronelib version: Official 2.0.1 patched")
-	set(ARDRONE_SDK_NAME "ardronelib" )
-	set(ARDRONE_SDK ${CMAKE_BINARY_DIR}/src/${ARDRONE_SDK_NAME}/ARDroneLib)
-	set(ARDRONE_SDK_LIB_PATH ${CMAKE_BINARY_DIR}/lib/ardrone)
-
-	ExternalProject_Add(ardronelib
-		GIT_REPOSITORY git://github.com/AutonomyLab/ardronelib.git
-		GIT_TAG bdacd1cbd3fbc54263d29e6e2067265e5941d10e
-		PREFIX ${CMAKE_BINARY_DIR}
-		CONFIGURE_COMMAND echo "No configure"
-		BUILD_COMMAND make
-		INSTALL_COMMAND make install INSTALL_PREFIX=${ARDRONE_SDK_LIB_PATH}
-		BUILD_IN_SOURCE 1
-	)
-endif()
+ExternalProject_Add(ardronelib
+        GIT_REPOSITORY git://github.com/AutonomyLab/ardronelib.git
+        GIT_TAG ${GIT_TAG}
+        PREFIX ${CMAKE_BINARY_DIR}
+        CONFIGURE_COMMAND echo "No configure"
+        BUILD_COMMAND make
+        INSTALL_COMMAND make install INSTALL_PREFIX=${ARDRONE_SDK_LIB_PATH}
+        BUILD_IN_SOURCE 1
+)
 
 
 ## Include ARDrone into build toolchain
