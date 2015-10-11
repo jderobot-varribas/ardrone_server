@@ -7,6 +7,16 @@ endif()
 include(ardrone_sdk_check_deps.cmake)
 
 if(ARDRONE_ALL_DEPS)
+    project(ardrone_server)
+
+    # Ice msg
+    set(SLICE_OUTPUT ${CMAKE_BINARY_DIR}/slice-include/${PROJECT_NAME})
+    add_custom_target(compile_ice ALL
+        COMMAND mkdir -p ${SLICE_OUTPUT}
+        COMMAND slice2cpp --underscore ${CMAKE_CURRENT_SOURCE_DIR}/slice/*.ice --output-dir=${SLICE_OUTPUT}
+    )
+    include_directories(${SLICE_OUTPUT})
+
 
 	set(CMAKE_CXX_FLAGS "-w -lIce -lIceUtil")
 
