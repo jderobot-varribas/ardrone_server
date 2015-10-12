@@ -24,6 +24,7 @@
 #include "components/navdatai.h"
 #include "components/cmdveli.h"
 #include "components/ardroneextrai.h"
+#include "components/navdatagpsi.h"
 #include <signal.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -209,7 +210,6 @@ void ARDroneDriver::initInterfaces()
 {
 	try{
 		Ice::PropertiesPtr prop = ic->getProperties();
-		
 		//Interface camera
 		std::string CameraEndpoints = prop->getProperty("ArDrone.Camera.Endpoints");
 		Ice::ObjectAdapterPtr adapterCamera =ic->createObjectAdapterWithEndpoints("ArDroneCameraServer", CameraEndpoints);
@@ -251,7 +251,14 @@ void ARDroneDriver::initInterfaces()
 		Ice::ObjectAdapterPtr adapterextra =ic->createObjectAdapterWithEndpoints("ArDroneExtra",extraEndpoints);
 		Ice::ObjectPtr extraO =new ardrone_extra::ExtraI();
 		adapterextra->add(extraO,ic->stringToIdentity(extraName));
-		adapterextra->activate();									
+        adapterextra->activate();
+        //Interface NavdataGPS
+        std::string gpsName = prop->getProperty("ArDrone.NavdataGPS.Name");
+        std::string gpsEndpoints = prop->getProperty("ArDrone.NavdataGPS.Endpoints");
+        Ice::ObjectAdapterPtr adapternavGPS =ic->createObjectAdapterWithEndpoints("ArDroneNavdataGPS",gpsEndpoints);
+        Ice::ObjectPtr navGPSO =new ardrone::navdatagps::NavdataGPSI();
+        adapternavGPS->add(navGPSO,ic->stringToIdentity(gpsName));
+        adapternavGPS->activate();
 
 	}catch (const Ice::Exception& ex) {
 		std::cerr << ex << std::endl;
