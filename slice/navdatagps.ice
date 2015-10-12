@@ -27,14 +27,14 @@ int   32 bits
 long  64 bits
 */
 
-module jderobot{
+//module jderobot{
 module ardrone {
 
-    const byte N_CHANNELS = 12;
+    const byte MaxNumChannels = 12;
 
     struct SatelliteInfo{
-        byte sat;    /* Satellite ID */
-        byte c_n0;   /* Satellite C/N0 */
+        byte satID;                 /* Satellite ID */
+        byte carrierToNoiseRatio;   /* Satellite C/N0 */
     };
     sequence<SatelliteInfo> Satellites;
 
@@ -46,27 +46,27 @@ module ardrone {
         double longitude;
         double elevation;
         double hdop;
-        int   data_available;
-        bool zero_validated;
-        bool wpt_validated;
+        int   dataAvailable;
+        bool zeroValidated;
+        bool wptValidated;
         double lat0;
         double long0;
-        double lat_fused;
-        double long_fused;
+        double latFused;
+        double longFused;
 
-        int gps_state;
+        int gpsState;
 
-        float X_traj;
-        float X_ref;
-        float Y_traj;
-        float Y_ref;
+        float Xtraj;
+        float Xref;
+        float Ytraj;
+        float Yref;
 
-        float theta_p;
-        float phi_p;
-        float theta_i;
-        float phi_i;
-        float theta_d;
-        float phi_d;
+        float thetaP;
+        float phiP;
+        float thetaI;
+        float phiI;
+        float thetaD;
+        float phiD;
 
         double vdop;
         double pdop;
@@ -74,19 +74,19 @@ module ardrone {
         float speed;
         int  lastFrameTimestamp;
         float degree;
-        float degree_magnetic;
+        float degreeMagnetic;
         float ehpe;
         float ehve;
 
-        float c_n0;  /* Signal to noise ratio (average of the four best satellites) */
-        int  nbsat;  /* Number of acquired satellites */
+        float channelsNoiseRatio;  /* Signal to noise ratio (average of the four best satellites) */
+        int  nbsat;                /* Number of acquired satellites */
         Satellites channels;
 
-        bool is_gps_plugged;
+        bool isGpsPlugged;
         int ephemerisStatus;
 
-        float vx_traj;
-        float vy_traj;
+        float vxTraj;
+        float vyTraj;
 
 
         int firmwareStatus;
@@ -98,6 +98,6 @@ module ardrone {
     };
 
 
-}; //ardrone
+//}; //ardrone
 }; //jderobot
 #endif
