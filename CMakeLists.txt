@@ -9,13 +9,13 @@ include(ardrone_sdk_check_deps.cmake)
 if(ARDRONE_ALL_DEPS)
     project(ardrone_server)
 
-    # Ice msg
-    set(SLICE_OUTPUT ${CMAKE_BINARY_DIR}/slice-include/${PROJECT_NAME})
-    add_custom_target(compile_ice ALL
-        COMMAND mkdir -p ${SLICE_OUTPUT}
-        COMMAND slice2cpp --underscore ${CMAKE_CURRENT_SOURCE_DIR}/slice/*.ice --output-dir=${SLICE_OUTPUT}
-    )
-    include_directories(${SLICE_OUTPUT})
+#    # Ice msg
+#    set(SLICE_OUTPUT ${CMAKE_BINARY_DIR}/slice-include/${PROJECT_NAME})
+#    add_custom_target(compile_ice ALL
+#        COMMAND mkdir -p ${SLICE_OUTPUT}
+#        COMMAND slice2cpp --underscore ${CMAKE_CURRENT_SOURCE_DIR}/slice/*.ice --output-dir=${SLICE_OUTPUT}
+#    )
+#    include_directories(${SLICE_OUTPUT})
 
 
 	set(CMAKE_CXX_FLAGS "-w -lIce -lIceUtil")
@@ -34,18 +34,20 @@ if(ARDRONE_ALL_DEPS)
         include_directories(include)
 
 
-	add_executable(ardrone_server src/ardrone_driver.cpp 
-					src/video.cpp 
+        add_executable(ardrone_server   src/ardrone_driver.cpp
+                                        src/ardrone_parser.cpp
+                                        src/ardrone_config.cpp
 					src/ardrone_sdk.cpp 
 					src/teleop_twist.cpp
+                                        src/video.cpp
 					src/components/cameraserver.cpp 
 					src/components/cmdveli.cpp				
 					src/components/pose3di.cpp
 					src/components/remoteconfigi.cpp
-					src/components/navdatai.cpp			
-					src/components/ardroneextrai.cpp									
-					src/ardrone_parser.cpp
-					src/ardrone_config.cpp)
+                                        src/components/navdatai.cpp
+                                        src/components/ardroneextrai.cpp
+                                        src/components/navdatagpsi.cpp
+        )
 
 	target_link_libraries(ardrone_server 
 				${ARDRONE_PCDRONE_LIB} 
