@@ -38,6 +38,10 @@ namespace pose3D
 			jderobot::Pose3DDataPtr pose3D;
 			float deg2rad(float d);
 			ARDroneDriver *driver;
+
+            bool gps_on, gps_valid;
+            bool gps_is_bootstrapped;
+            double x0, y0, z0;
 	};
 }
 
