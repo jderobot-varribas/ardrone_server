@@ -66,6 +66,14 @@ if(ARDRONE_ALL_DEPS)
 				JderobotInterfaces
 				${libxmlpp_LIBRARIES})
 
+	add_custom_command(TARGET ardrone_server POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+			${CMAKE_CURRENT_SOURCE_DIR}/config $<TARGET_FILE_DIR:ardrone_server>/config)
+
+	add_custom_command(TARGET ardrone_server POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different
+			${CMAKE_CURRENT_SOURCE_DIR}/ardrone_interfaces.cfg $<TARGET_FILE_DIR:ardrone_server>)
+
 ELSE()
 	message(WARNING "ardrone_server marked to build, but required dependencies were not met.
 		You should run make twice to link in-source generated ardonelib")
