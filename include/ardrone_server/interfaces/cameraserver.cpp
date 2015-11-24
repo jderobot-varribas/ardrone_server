@@ -21,6 +21,8 @@
  *
  */
 
+#ifndef CAMERASERVER_H_
+#define CAMERASERVER_H_
 
 #include "ardrone_server/teleop_twist.h"
 #include "ardrone_server/video.h"
@@ -293,3 +295,5 @@ class CameraI: virtual public jderobot::Camera {
 }; // end class CameraI
 
 } //namespace
+
+#endif // CAMERASERVER_H_

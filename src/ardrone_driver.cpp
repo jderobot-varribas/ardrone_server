@@ -18,13 +18,14 @@
  */
 
 #include "ardrone_server/ardrone_driver.h"
-#include "components/pose3di.h"
-#include "components/remoteconfigi.h"
-#include "components/cameraserver.cpp"
-#include "components/navdatai.h"
-#include "components/cmdveli.h"
-#include "components/ardroneextrai.h"
+#include "ardrone_server/interfaces/pose3di.h"
+#include "ardrone_server/interfaces/remoteconfigi.h"
+#include "ardrone_server/interfaces/cameraserver.cpp" /// FOUND A VERY DANGEROUS PROBLEM HERE
+#include "ardrone_server/interfaces/navdatai.h"
+#include "ardrone_server/interfaces/cmdveli.h"
+#include "ardrone_server/interfaces/ardroneextrai.h"
 #include <signal.h>
+
 
 ARDroneDriver::ARDroneDriver()
 {
