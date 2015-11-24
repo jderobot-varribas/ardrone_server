@@ -38,7 +38,7 @@ module ardrone {
     };
     sequence<SatelliteInfo> Satellites;
 
-    class NavdataGPSData
+    struct NavdataGPSData
     {
         short tag;
         short size;
