@@ -17,7 +17,7 @@
  *       Alberto Martín Florido <almartinflorido@gmail.com>	
  */
 
-#include "ardrone_driver.h"
+#include "ardrone_server/ardrone_driver.h"
 #include "components/pose3di.h"
 #include "components/remoteconfigi.h"
 #include "components/cameraserver.cpp"

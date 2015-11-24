@@ -16,6 +16,9 @@ if(ARDRONE_ALL_DEPS)
 	link_directories(
 		${ardronelib_LIBRARY_DIRS})
 
+        include_directories(include)
+
+
 	add_executable(ardrone_server src/ardrone_driver.cpp 
 					src/video.cpp 
 					src/ardrone_sdk.cpp 

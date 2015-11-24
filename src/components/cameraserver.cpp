@@ -22,8 +22,8 @@
  */
 
 
-#include "../teleop_twist.h"
-#include "../video.h"
+#include "ardrone_server/teleop_twist.h"
+#include "ardrone_server/video.h"
 
 #include <Ice/Ice.h>
 #include <IceUtil/IceUtil.h>
