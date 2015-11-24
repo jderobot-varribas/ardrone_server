@@ -1,5 +1,15 @@
 
 if(ARDRONE_ALL_DEPS)
+	project(ardrone_server)
+
+	# Ice msg
+	set(SLICE_OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/include-slice)
+	file(MAKE_DIRECTORY ${SLICE_OUTPUT})
+	execute_process(
+		COMMAND slice2cpp ${CMAKE_CURRENT_SOURCE_DIR}/slice/navdatagps.ice --output-dir=${SLICE_OUTPUT}
+	)
+	include_directories(${SLICE_OUTPUT})
+
 
 	set(CMAKE_CXX_FLAGS "-w -lIce -lIceUtil")
 
