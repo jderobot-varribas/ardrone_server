@@ -9,6 +9,7 @@ if(ARDRONE_ALL_DEPS)
 		COMMAND slice2cpp ${CMAKE_CURRENT_SOURCE_DIR}/slice/navdatagps.ice --output-dir=${SLICE_OUTPUT}
 	)
 	include_directories(${SLICE_OUTPUT})
+	add_library(ardrone_server_msgs STATIC ${SLICE_OUTPUT}/navdatagps.cpp)
 
 
 	set(CMAKE_CXX_FLAGS "-w -lIce -lIceUtil")
@@ -40,6 +41,7 @@ if(ARDRONE_ALL_DEPS)
 					src/interfaces/remoteconfigi.cpp
 					src/interfaces/navdatai.cpp
 					src/interfaces/ardroneextrai.cpp
+					src/interfaces/navdatagpsi.cpp
 
 					src/ardrone_parser.cpp
 					src/ardrone_config.cpp
@@ -56,6 +58,10 @@ if(ARDRONE_ALL_DEPS)
 				colorspacesmm
 				JderobotInterfaces
 				${libxmlpp_LIBRARIES})
+
+	target_link_libraries(ardrone_server
+				ardrone_server_msgs)
+
 
 	add_custom_command(TARGET ardrone_server POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_directory
