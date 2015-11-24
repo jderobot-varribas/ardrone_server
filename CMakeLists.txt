@@ -78,6 +78,13 @@ if(ARDRONE_ALL_DEPS)
 		set_target_properties(ardrone_server test_parser PROPERTIES COMPILE_DEFINITIONS "ARDRONE_TEST_PARSER")
 	endif()
 
+
+	add_executable(ardrone_print_gps_data test/print_gps_data.cpp)
+	target_link_libraries(ardrone_print_gps_data
+		${ZeroCIce_LIBRARIES}
+		ardrone_server_msgs
+		${CMAKE_THREAD_LIBS_INIT})
+
 ELSE()
 	message(WARNING "ardrone_server marked to build, but required dependencies were not met.
 		You should install third party library: ardonelib")
